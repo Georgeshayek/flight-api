@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Passenger extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'FirstName',
-        'LastName',
+    protected $guarded=[
+        'first_name',
+        'last_name',
         'email',
         'password',
-        'DOB',
+        'date_of_birth',
         'passport_expiry_date'
     ];
     public function flights(){
-        return $this->belongsToMany(Flight::class,'passenger_flight','passenger_id','flight_id');
+        return $this->belongsToMany(Flight::class);
     }
 }
