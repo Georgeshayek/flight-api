@@ -14,7 +14,7 @@ class UserController extends Controller
 
         return response()->json(['users'=>QueryBuilder::for(User::class)
         ->allowedFilters(['name'])
-        ->paginate(5)]);
+        ->paginate(100)]);
     }
   
 }

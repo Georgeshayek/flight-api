@@ -28,4 +28,8 @@ class Flight extends Model
     {
         return $query->where('departure_time', '<=', Carbon::parse($date));
     }
+    public function scopeArrivesBefore(Builder $query, $date): Builder
+    {
+        return $query->where('arrival_time', '<=', Carbon::parse($date));
+    }
 }
