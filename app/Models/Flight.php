@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\Passenger;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -22,5 +24,8 @@ class Flight extends Model
        
         return $this->belongsToMany(Passenger::class);
     }
-
+    public function scopeStartsBefore(Builder $query, $date): Builder
+    {
+        return $query->where('departure_time', '<=', Carbon::parse($date));
+    }
 }
