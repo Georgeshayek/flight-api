@@ -20,7 +20,7 @@ class PassengerFactory extends Factory
         return [
             'first_name'=>fake()->firstName(),
             'last_name'=>fake()->lastName(),
-            'email'=>fake()->email(),
+            'email'=>fake()->unique()->email(),
             'password'=>fake()->password(6,20),
             'date_of_birth'=>fake()->date('Y-m-d',$max='now'),
             'passport_expiry_date' => $this->faker->dateTimeBetween('now', '+10 year')->format('Y-m-d')
