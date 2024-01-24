@@ -20,7 +20,7 @@ class FlightFactory extends Factory
         $min_arrival_time =Carbon::instance($departure_time)->addHour();
         $max_arrival_time = Carbon::instance($departure_time)->addDay();
         return [
-            'number'=>fake()->numberBetween(100,1000),
+            'number'=>fake()->unique()->numberBetween(100,1000),
             'departure_city'=>fake()->city(),
             'arrival_city'=>fake()->city(),
             'departure_time' =>$departure_time->format('Y-m-d H:i:s'),

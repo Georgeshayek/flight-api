@@ -5,11 +5,12 @@ namespace App\Models;
 use App\Models\Flight;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Passenger extends Model
 {
     use HasFactory;
-    protected $guarded=[
+    protected $fillable=[
         'first_name',
         'last_name',
         'email',
@@ -17,7 +18,8 @@ class Passenger extends Model
         'date_of_birth',
         'passport_expiry_date'
     ];
-    public function flights(){
+    protected $guarded=[];
+    public function flights(): BelongsToMany{
         return $this->belongsToMany(Flight::class);
     }
 }
