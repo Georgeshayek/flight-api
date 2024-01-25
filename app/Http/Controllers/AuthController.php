@@ -34,20 +34,20 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'min:6']
         ]);
-        $user=User::where('email', $fields['email'])->first();
-       
-        if(!$user|| !Hash::check($fields['password'],$user->password))
-       {
-        return response()->json(['message' => 'wrong credential'],401);
-       }
-         $user->assignRole('flight booker');
-         $token = $user->createToken('mytoken')->plainTextToken;
+        $user = User::where('email', $fields['email'])->first();
+
+        if (!$user || !Hash::check($fields['password'], $user->password)) {
+            return response()->json(['message' => 'wrong credential'], 401);
+        }
+        //$user->assignRole('flight booker');
+        $token = $user->createToken('mytoken')->plainTextToken;
 
         return response()->json(['user' => $user, 'token' => $token], 201);
     }
-    public function logout(Request $request){
-         auth()->user()->tokens()->delete();
+    public function logout(Request $request)
+    {
+        auth()->user()->tokens()->delete();
 
-        return response()->json(['message'=>'logged out']);
+        return response()->json(['message' => 'logged out']);
     }
 }
