@@ -12,16 +12,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Flight extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'number',
         'departure_city',
         'arrival_city',
         'departure_time',
         'arrival_time'
     ];
-    protected $guarded=[];
-    public function passengers():BelongsToMany{
-       
+    protected $guarded = [];
+    public function passengers(): BelongsToMany
+    {
+
         return $this->belongsToMany(Passenger::class);
     }
     public function scopeStartsBefore(Builder $query, $date): Builder

@@ -10,25 +10,29 @@ use Spatie\QueryBuilder\AllowedFilter;
 class FlightController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
 
-        return response()->json(['flights'=>QueryBuilder::for(Flight::class)
-        ->allowedFilters([AllowedFilter::exact('id'),
-                            AllowedFilter::exact('number'),
-                            AllowedFilter::scope('starts_before'),
-                            AllowedFilter::scope('arrives_before'),
-                            'arrival_city',
-                            'departure_city'])
-        ->allowedSorts( 
-                        'departure_city',
-                        'arrival_city',
-                        'departure_time',
-                        'arrival_time')
-        ->paginate(100)]);
-        
+        return response()->json(['flights' => QueryBuilder::for(Flight::class)
+            ->allowedFilters([
+                AllowedFilter::exact('id'),
+                AllowedFilter::exact('number'),
+                AllowedFilter::scope('starts_before'),
+                AllowedFilter::scope('arrives_before'),
+                'arrival_city',
+                'departure_city'
+            ])
+            ->allowedSorts(
+                'departure_city',
+                'arrival_city',
+                'departure_time',
+                'arrival_time'
+            )
+            ->paginate(100)]);
     }
-    public function show(Flight $flight){
+    public function show(Flight $flight)
+    {
         //return all users that belong to the flight passed by parameter.
-        return response()->json(['users'=>Flight::find($flight->id)->passengers()->paginate(5)]);
+        return response()->json(['users' => Flight::find($flight->id)->passengers()->paginate(5)]);
     }
 }
