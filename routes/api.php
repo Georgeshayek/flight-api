@@ -21,12 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 //users API's
-Route::get('/users',[UserController::class,'index']);
-Route::post('/users/create',[UserController::class,'store']);
-Route::put('/users/{user}/edit',[UserController::class,'update']);
-Route::delete('/users/{user}',[UserController::class,'destroy']);
-Route::get('/users/{user}',[UserController::class,'show']);
-
+Route::resource('users', UserController::class);
 Route::get('/passengers',[PassengerController::class,'index']);
 Route::get('/flights',[FlightController::class,'index']);
 Route::get('/flights/{flight}',[FlightController::class,'show']);
