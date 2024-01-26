@@ -26,7 +26,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/users/export/', [UserController::class, 'export']);
 //users API's
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum','throttle:api']], function () {
     Route::group(['middleware' => ['role:super-admin']], function () {
         Route::resource('users', UserController::class);
     });
