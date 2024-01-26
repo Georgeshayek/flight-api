@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {   
-        $role = Role::create(['name' => 'flight booker']);
-        $role1 = Role::create(['name' => 'flight creator']);
-        $permission = Permission::create(['name' => 'join flight']);
-        $permission1 = Permission::create(['name' => 'create flight']);
-        $permission2 = Permission::create(['name' => 'edit flight']);
-        $role->givePermissionTo($permission);
-        $role1->syncPermissions($permission1,$permission2);
+        $role = Role::create(['name' => 'super-admin']);
+        // $role1 = Role::create(['name' => 'flight creator']);
+        // $permission = Permission::create(['name' => 'join flight']);
+        // $permission1 = Permission::create(['name' => 'create flight']);
+        // $permission2 = Permission::create(['name' => 'edit flight']);
+        // $role->givePermissionTo($permission);
+        // $role1->syncPermissions($permission1,$permission2);
          \App\Models\User::factory(10)->create();
             \App\Models\Passenger::factory(1000)->create();
             \App\Models\Flight::factory(50)->create();

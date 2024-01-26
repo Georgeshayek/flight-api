@@ -25,6 +25,7 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
         $token = $user->createToken('mytoken')->plainTextToken;
+        // $user->assignRole('super-admin');
 
         return response()->json(['user' => $user, 'token' => $token], 201);
     }
@@ -39,7 +40,7 @@ class AuthController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response()->json(['message' => 'wrong credential'], 401);
         }
-        //$user->assignRole('flight booker');
+        // $user->assignRole('super admin');
         $token = $user->createToken('mytoken')->plainTextToken;
 
         return response()->json(['user' => $user, 'token' => $token], 201);

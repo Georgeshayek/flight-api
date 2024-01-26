@@ -23,12 +23,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login',[AuthController::class,'login']);
+Route::post('/login', [AuthController::class, 'login']);
 //users API's
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::resource('users', UserController::class);
+    Route::group(['middleware' => ['role:super-admin']], function () {
+        Route::resource('users', UserController::class);
+    });
     Route::get('/passengers', [PassengerController::class, 'index']);
     Route::get('/flights', [FlightController::class, 'index']);
     Route::get('/flights/{flight}', [FlightController::class, 'show']);
-    Route::post('/logout',[AuthController::class,'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
