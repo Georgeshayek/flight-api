@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use App\Models\Flight;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -61,5 +63,9 @@ class UserController extends Controller
         }
         $user->delete();
         return response()->json(['message' => 'user has been deleted'], 202);
+    }
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }
