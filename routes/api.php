@@ -25,12 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/users/export/', [UserController::class, 'export']);
+Route::get('/passengers', [PassengerController::class, 'index']);
+
 //users API's
 Route::group(['middleware' => ['auth:sanctum','throttle:api']], function () {
     Route::group(['middleware' => ['role:super-admin']], function () {
         Route::resource('users', UserController::class);
     });
-    Route::get('/passengers', [PassengerController::class, 'index']);
     Route::get('/flights', [FlightController::class, 'index']);
     Route::get('/flights/{flight}', [FlightController::class, 'show']);
     Route::post('/logout', [AuthController::class, 'logout']);

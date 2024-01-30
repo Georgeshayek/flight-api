@@ -7,11 +7,15 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        Commands\AutoFlightReminder::class];
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('app:auto-flight-reminder')->hourly();
+
         // $schedule->command('inspire')->hourly();
     }
 
