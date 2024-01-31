@@ -41,11 +41,11 @@ class AutoFlightReminder extends Command
 
         if ($flights->count() > 0) {
             foreach ($flights as $flight) {
-                $flight1 = Flight::find($flight['id']);
-                $passengers = $flight1->passengers;
+                $flight = Flight::find($flight['id']);
+                $passengers = $flight->passengers;
                 if ($passengers->count() > 0) {
                     foreach ($passengers as $passenger) {
-                        Mail::to('georgeshayek850@gmail.com')->send(new FlightReminder($passenger, $flight1));
+                        Mail::to($passenger->email)->send(new FlightReminder($passenger, $flight));
                     }
                 }
             }

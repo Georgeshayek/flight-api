@@ -14,7 +14,11 @@
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
+// $app->register(OwenIt\Auditing\AuditingServiceProvider::class);
+// $app->withFacades();
 
+// $app->withEloquent();
+// $app->configure('audit');
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
@@ -40,6 +44,12 @@ $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
+
+// ...
+
+// $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+
+// ...
 
 /*
 |--------------------------------------------------------------------------

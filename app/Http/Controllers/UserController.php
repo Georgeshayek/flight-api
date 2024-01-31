@@ -6,6 +6,7 @@ use App\Models\User;
 
 use App\Models\Flight;
 use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\Rule;
@@ -67,5 +68,16 @@ class UserController extends Controller
     public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
+    }
+    public function import(Request $request)
+    {
+
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls',
+        ]);
+        $file = $request->file('file');
+        Excel::import(new UsersImport, $file);
+
+        return response()->json(['message' => 'users have been added']);
     }
 }
