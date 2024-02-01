@@ -21,6 +21,11 @@ class Flight extends Model implements Auditable
         'departure_time',
         'arrival_time'
     ];
+    protected $auditInclude = [
+        'number',
+        'departure_city',
+        'arrival_city'
+    ];
     protected $guarded = [];
     public function passengers(): BelongsToMany
     {

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use OwenIt\Auditing\Contracts\Auditable;
-
 class Passenger extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
@@ -20,7 +19,14 @@ class Passenger extends Model implements Auditable
         'email',
         'password',
         'date_of_birth',
-        'passport_expiry_date'
+        'passport_expiry_date',
+        'image',
+        'thumbnail'
+    ];
+    protected $auditInclude = [
+        'first_name',
+        'last_name',
+        'email',
     ];
     protected $guarded=[];
     public function flights(): BelongsToMany{

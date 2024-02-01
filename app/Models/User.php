@@ -26,6 +26,10 @@ class User extends Authenticatable implements  Auditable
         'email',
         'password',
     ];
+    protected $auditInclude = [
+        'name',
+        'email',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
