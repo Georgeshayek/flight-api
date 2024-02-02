@@ -50,9 +50,8 @@ class PassengerController extends Controller
 
             $imagePath = $img->store('images', 'public');
             $imagePath2 = $this->resizeAndStoreImage($img);
-
             $passenger->update(['image' => $imagePath,'thumbnail' => $imagePath2]);
-            //$passenger->update([]);
+            
             return response()->json(['message' => 'Image stored successfully']);
         }
 
