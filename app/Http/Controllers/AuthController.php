@@ -41,7 +41,9 @@ class AuthController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response()->json(['message' => 'wrong credential'], 401);
         }
-        Session::flush();
+        auth()->user()->tokens()->delete();
+
+       // Session::flush();
 
         $token = $user->createToken('mytoken')->plainTextToken;
 
