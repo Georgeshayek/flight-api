@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -40,7 +41,8 @@ class AuthController extends Controller
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response()->json(['message' => 'wrong credential'], 401);
         }
-        // $user->assignRole('super admin');
+        Session::flush();
+
         $token = $user->createToken('mytoken')->plainTextToken;
 
         return response()->json(['user' => $user, 'token' => $token], 201);
