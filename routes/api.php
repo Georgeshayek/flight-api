@@ -21,16 +21,17 @@ use App\Http\Controllers\PassengerController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::put('/passengers/{passenger}/uploadimage',[PassengerController::class,'uploadImage']);
-
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+Route::put('/passengers/{passenger}/uploadimage', [PassengerController::class, 'uploadImage']);
+Route::group(['middleware' => ['sanitize.input']], function () {
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
+});
 Route::get('/users/export/', [UserController::class, 'export']);
 Route::post('/users/import/', [UserController::class, 'import']);
 Route::get('/passengers', [PassengerController::class, 'index']);
 
 //users API's
-Route::group(['middleware' => ['auth:sanctum','throttle:api']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'throttle:api']], function () {
     Route::group(['middleware' => ['role:super-admin']], function () {
         Route::resource('users', UserController::class);
     });
